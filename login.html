@@ -4,49 +4,6 @@
   <meta charset="UTF-8">
   <title>Login - LS Academy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-    const supabase = createClient('https://rdziigwttjhnrmiutxbp.supabase.co', 'sb_publishable_YOV4qY3s5M7W4u9vCcApnQ_-mdd6xXA')
-
-    const { data: { session } = await supabase.auth.getSession()
-    if (session) window.location.replace("dashboard.html")
-
-    window.login = async function() {
-      const email = document.getElementById('email').value
-      const password = document.getElementById('password').value
-      const { error } = await supabase.auth.signInWithPassword({ email, password })
-      if (error) alert("Login gagal: " + error.message)
-      else window.location.replace("dashboard.html")
-    }
-
-    window.register = async function() {
-      const email = document.getElementById('email').value
-      const password = document.getElementById('password').value
-      
-      if (!email || !password) {
-        alert("Email dan password wajib diisi!")
-        return
-      }
-      if (password.length < 6) {
-        alert("Password minimal 6 karakter!")
-        return
-      }
-      
-      const { error } = await supabase.auth.signUp({ 
-        email, 
-        password,
-        options: {
-          emailRedirectTo: window.location.origin + '/LS-Academy/dashboard.html'
-        }
-      })
-      
-      if (error) {
-        alert("Gagal daftar: " + error.message)
-      } else {
-        alert("Akun berhasil dibuat! Cek inbox email kamu untuk verifikasi, lalu login.")
-      }
-    }
-  </script>
   <style>
     body {
       margin: 0;
@@ -111,11 +68,55 @@
     <p>Belajar Tanpa Batas</p>
     <input type="email" id="email" placeholder="EMAIL">
     <input type="password" id="password" placeholder="Password minimal 6 karakter">
-    <button onclick="login()">LOGIN</button>
+    <button id="loginBtn">LOGIN</button>
     
     <div class="register-link">
-      Belum punya akun? <a onclick="register()">Buat Akun</a>
+      Belum punya akun? <a id="registerBtn">Buat Akun</a>
     </div>
   </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+    const supabase = createClient('https://rdziigwttjhnrmiutxbp.supabase.co', 'sb_publishable_YOV4qY3s5M7W4u9vCcApnQ_-mdd6xXA')
+
+    const { data: { session } = await supabase.auth.getSession()
+    if (session) window.location.replace("dashboard.html")
+
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+      const email = document.getElementById('email').value
+      const password = document.getElementById('password').value
+      const { error } = await supabase.auth.signInWithPassword({ email, password })
+      if (error) alert("Login gagal: " + error.message)
+      else window.location.replace("dashboard.html")
+    })
+
+    document.getElementById('registerBtn').addEventListener('click', async () => {
+      const email = document.getElementById('email').value
+      const password = document.getElementById('password').value
+      
+      if (!email || !password) {
+        alert("Email dan password wajib diisi!")
+        return
+      }
+      if (password.length < 6) {
+        alert("Password minimal 6 karakter!")
+        return
+      }
+      
+      const { error } = await supabase.auth.signUp({ 
+        email, 
+        password,
+        options: {
+          emailRedirectTo: window.location.origin + '/LS-Academy/dashboard.html'
+        }
+      })
+      
+      if (error) {
+        alert("Gagal daftar: " + error.message)
+      } else {
+        alert("Akun berhasil dibuat! Cek inbox email kamu untuk verifikasi, lalu login.")
+      }
+    })
+  </script>
 </body>
 </html>
