@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - LS Academy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+    const supabase = createClient('https://rdziigwttjhnrmiutxbp.supabase.co', 'sb_publishable_YOV4qY3s5M7W4u9vCcApnQ_-mdd6xXA')
+
+    const { data: { session } = await supabase.auth.getSession()
+    if (session) window.location.replace("dashboard.html")
+
+    window.login = async function() {
+      const email = document.getElementById('email').value
+      const password = document.getElementById('password').value
+      const { error } = await supabase.auth.signInWithPassword({ email, password })
+      if (error) alert(error.message)
+      else window.location.replace("dashboard.html")
+    }
+
+    window.register = async function() {
+      const email = document.getElementById('email').value
+      const password = document.getElementById('password').value
+      if (!email || !password) {
+        alert("Isi email dan password dulu")
+        return
+      }
+      const { error } = await supabase.auth.signUp({ email, password })
+      if (error) alert(error.message)
+      else alert("Akun berhasil dibuat! Cek email buat verifikasi, lalu login.")
+    }
+  </script>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(180deg, #0099FF 0%, #00BFFF 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .box {
+      text-align: center;
+      width: 85%;
+      max-width: 350px;
+    }
+    h2 {
+      color: #FFD700;
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+    p {
+      color: white;
+      margin-bottom: 25px;
+    }
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 12px;
+      border: none;
+      border-radius: 8px;
+      background: white;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    button {
+      padding: 12px 30px;
+      background: #4A5FFF;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+    .register-link {
+      margin-top: 15px;
+      color: white;
+      font-size: 14px;
+    }
+    .register-link a {
+      color: #FFD700;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>LS Academy</h2>
+    <p>Belajar Tanpa Batas</p>
+    <input type="email" id="email" placeholder="EMAIL">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">LOGIN</button>
+    
+    <div class="register-link">
+      Belum punya akun? <a onclick="register()">Buat Akun</a>
+    </div>
+  </div>
+</body>
+</html>
