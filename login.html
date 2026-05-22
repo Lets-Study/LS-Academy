@@ -19,51 +19,21 @@
       width: 85%;
       max-width: 350px;
     }
-    h2 {
-      color: #FFD700;
-      font-size: 22px;
-      margin-bottom: 5px;
-    }
-    p {
-      color: white;
-      margin-bottom: 25px;
-    }
+    h2 {color: #FFD700; font-size: 22px; margin-bottom: 5px;}
+    p {color: white; margin-bottom: 25px;}
     input {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 12px;
-      border: none;
-      border-radius: 8px;
-      background: white;
-      box-sizing: border-box;
-      font-size: 16px;
+      width: 100%; padding: 14px; margin-bottom: 12px; border: none;
+      border-radius: 8px; background: white; box-sizing: border-box; font-size: 16px;
     }
     button {
-      padding: 12px 30px;
-      background: #4A5FFF;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 16px;
-      width: 100%;
+      padding: 12px 30px; background: #4A5FFF; color: white; border: none;
+      border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 16px; width: 100%;
       margin-bottom: 10px;
     }
-    .register-link {
-      margin-top: 15px;
-      color: white;
-      font-size: 14px;
-    }
+    .register-link {margin-top: 15px; color: white; font-size: 14px;}
     .register-link button {
-      background: none;
-      border: none;
-      color: #FFD700;
-      font-weight: bold;
-      cursor: pointer;
-      padding: 0;
-      font-size: 14px;
-      width: auto;
+      background: none; border: none; color: #FFD700; font-weight: bold; 
+      cursor: pointer; padding: 0; font-size: 14px; width: auto;
     }
   </style>
 </head>
@@ -71,10 +41,8 @@
   <div class="box">
     <h2>LS Academy</h2>
     <p>Belajar Tanpa Batas</p>
-    
     <input type="email" id="email" placeholder="EMAIL">
     <input type="password" id="password" placeholder="Password min 6 karakter">
-    
     <button id="loginBtn">LOGIN</button>
     
     <div class="register-link">
@@ -92,11 +60,7 @@
     document.getElementById('loginBtn').addEventListener('click', async () => {
       const email = document.getElementById('email').value
       const password = document.getElementById('password').value
-      
-      if (!email || !password) {
-        alert("Email dan password wajib diisi!")
-        return
-      }
+      if (!email || !password) return alert("Email dan password wajib diisi!")
       
       const { error } = await supabase.auth.signInWithPassword({ email, password })
       if (error) alert("Login gagal: " + error.message)
@@ -106,23 +70,12 @@
     document.getElementById('registerBtn').addEventListener('click', async () => {
       const email = document.getElementById('email').value
       const password = document.getElementById('password').value
-      
-      if (!email || !password) {
-        alert("Email dan password wajib diisi!")
-        return
-      }
-      if (password.length < 6) {
-        alert("Password minimal 6 karakter!")
-        return
-      }
+      if (!email || !password) return alert("Email dan password wajib diisi!")
+      if (password.length < 6) return alert("Password minimal 6 karakter!")
       
       const { error } = await supabase.auth.signUp({ email, password })
-      
-      if (error) {
-        alert("Gagal daftar: " + error.message)
-      } else {
-        alert("Akun berhasil dibuat! Cek email buat verifikasi, lalu login.")
-      }
+      if (error) alert("Gagal daftar: " + error.message)
+      else alert("Akun berhasil dibuat! Cek email buat verifikasi, lalu login.")
     })
   </script>
 </body>
