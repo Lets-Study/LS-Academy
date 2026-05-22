@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>LS Academy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(180deg, #0099FF 0%, #00BFFF 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      animation: fadeOut 2s ease 2s forwards;
+    }
+    h1 {
+      color: #FFD700;
+      font-size: 32px;
+      margin: 0;
+    }
+    p {
+      font-size: 16px;
+      margin-top: 8px;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+  </style>
+  <script>
+    setTimeout(() => {
+      window.location.href = "login.html"
+    }, 2200)
+  </script>
+</head>
+<body>
+  <h1>LS Academy</h1>
+  <p>Belajar Tanpa Batas</p>
+</body>
+</html>
