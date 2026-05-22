@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - LS Academy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+    const supabase = createClient('https://rdziigwttjhnrmiutxbp.supabase.co', 'sb_publishable_YOV4qY3s5M7W4u9vCcApnQ_-mdd6xXA')
+    
+    const { data: { session } = await supabase.auth.getSession()
+    if (!session) window.location.replace("login.html")
+
+    window.logout = async function() {
+      await supabase.auth.signOut()
+      window.location.replace("login.html")
+    }
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #F5F7FA;
+      padding-bottom: 70px;
+    }
+    header {
+      background: #0099FF;
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+    header button {
+      background: #FFD700;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .content {
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .card h3 {
+      margin: 0 0 10px 0;
+      color: #333;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    .menu-item {
+      background: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #333;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .menu-item div {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+    .nav-item {
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+      text-decoration: none;
+    }
+    .nav-item.active {
+      color: #0099FF;
+      font-weight: bold;
+    }
+    .nav-item div {
+      font-size: 22px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>Halo, Siswa!</h2>
+    <button onclick="logout()">Logout</button>
+  </header>
+
+  <div class="content">
+    <div class="card">
+      <h3>📢 Pemberitahuan</h3>
+      <p>Lomba Matematika Nasional dibuka 15 Oktober 2025. Daftar sekarang!</p>
+    </div>
+
+    <h3>Pilih Jenjang Belajar</h3>
+    <div class="menu-grid">
+      <a href="#" class="menu-item">
+        <div>📚</div>
+        <div>SD</div>
+      </a>
+      <a href="#" class="menu-item">
+        <div>📖</div>
+        <div>SMP</div>
+      </a>
+      <a href="#" class="menu-item">
+        <div>🎓</div>
+        <div>SMA</div>
+      </a>
+      <a href="#" class="menu-item">
+        <div>🤟</div>
+        <div>Communicate</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="#" class="nav-item active">
+      <div>🏠</div>
+      <div>Home</div>
+    </a>
+    <a href="#" class="nav-item">
+      <div>📚</div>
+      <div>Belajar</div>
+    </a>
+    <a href="#" class="nav-item">
+      <div>🤟</div>
+      <div>Chat</div>
+    </a>
+    <a href="#" class="nav-item">
+      <div>👤</div>
+      <div>Profil</div>
+    </a>
+  </div>
+</body>
+</html>
