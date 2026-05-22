@@ -27,7 +27,7 @@ button{padding:12px 30px;background:#4A5FFF;color:white;border:none;border-radiu
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 const supabase = createClient('https://rdziigwttjhnrmiutxbp.supabase.co','sb_publishable_YOV4qY3s5M7W4u9vCcApnQ_-mdd6xXA')
-const { data: { session } = await supabase.auth.getSession()
+const { data: { session } = await supabase.auth.getSession()}
 if(session)window.location.replace("dashboard.html")
 document.getElementById('loginBtn').addEventListener('click',async()=>{
 const email=document.getElementById('email').value
