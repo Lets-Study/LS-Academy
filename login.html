@@ -19,47 +19,18 @@
       width: 85%;
       max-width: 350px;
     }
-    h2 {
-      color: #FFD700;
-      font-size: 22px;
-      margin-bottom: 5px;
-    }
-    p {
-      color: white;
-      margin-bottom: 25px;
-    }
+    h2 {color: #FFD700; font-size: 22px; margin-bottom: 5px;}
+    p {color: white; margin-bottom: 25px;}
     input {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 12px;
-      border: none;
-      border-radius: 8px;
-      background: white;
-      box-sizing: border-box;
-      font-size: 16px;
+      width: 100%; padding: 14px; margin-bottom: 12px; border: none;
+      border-radius: 8px; background: white; box-sizing: border-box; font-size: 16px;
     }
     button {
-      padding: 12px 30px;
-      background: #4A5FFF;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 16px;
-      width: 100%;
+      padding: 12px 30px; background: #4A5FFF; color: white; border: none;
+      border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 16px; width: 100%;
     }
-    .register-link {
-      margin-top: 15px;
-      color: white;
-      font-size: 14px;
-    }
-    .register-link a {
-      color: #FFD700;
-      text-decoration: none;
-      font-weight: bold;
-      cursor: pointer;
-    }
+    .register-link {margin-top: 15px; color: white; font-size: 14px;}
+    .register-link a {color: #FFD700; text-decoration: none; font-weight: bold; cursor: pointer;}
   </style>
 </head>
 <body>
@@ -67,7 +38,7 @@
     <h2>LS Academy</h2>
     <p>Belajar Tanpa Batas</p>
     <input type="email" id="email" placeholder="EMAIL">
-    <input type="password" id="password" placeholder="Password minimal 6 karakter">
+    <input type="password" id="password" placeholder="Password min 6 karakter">
     <button id="loginBtn">LOGIN</button>
     
     <div class="register-link">
@@ -103,18 +74,12 @@
         return
       }
       
-      const { error } = await supabase.auth.signUp({ 
-        email, 
-        password,
-        options: {
-          emailRedirectTo: window.location.origin + '/LS-Academy/dashboard.html'
-        }
-      })
+      const { error } = await supabase.auth.signUp({ email, password })
       
       if (error) {
         alert("Gagal daftar: " + error.message)
       } else {
-        alert("Akun berhasil dibuat! Cek inbox email kamu untuk verifikasi, lalu login.")
+        alert("Akun berhasil dibuat! Cek email buat verifikasi, lalu login.")
       }
     })
   </script>
