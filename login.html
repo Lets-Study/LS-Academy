@@ -15,20 +15,36 @@
       const email = document.getElementById('email').value
       const password = document.getElementById('password').value
       const { error } = await supabase.auth.signInWithPassword({ email, password })
-      if (error) alert(error.message)
+      if (error) alert("Login gagal: " + error.message)
       else window.location.replace("dashboard.html")
     }
 
     window.register = async function() {
       const email = document.getElementById('email').value
       const password = document.getElementById('password').value
+      
       if (!email || !password) {
-        alert("Isi email dan password dulu")
+        alert("Email dan password wajib diisi!")
         return
       }
-      const { error } = await supabase.auth.signUp({ email, password })
-      if (error) alert(error.message)
-      else alert("Akun berhasil dibuat! Cek email buat verifikasi, lalu login.")
+      if (password.length < 6) {
+        alert("Password minimal 6 karakter!")
+        return
+      }
+      
+      const { error } = await supabase.auth.signUp({ 
+        email, 
+        password,
+        options: {
+          emailRedirectTo: window.location.origin + '/LS-Academy/dashboard.html'
+        }
+      })
+      
+      if (error) {
+        alert("Gagal daftar: " + error.message)
+      } else {
+        alert("Akun berhasil dibuat! Cek inbox email kamu untuk verifikasi, lalu login.")
+      }
     }
   </script>
   <style>
@@ -94,7 +110,7 @@
     <h2>LS Academy</h2>
     <p>Belajar Tanpa Batas</p>
     <input type="email" id="email" placeholder="EMAIL">
-    <input type="password" id="password" placeholder="Password">
+    <input type="password" id="password" placeholder="Password minimal 6 karakter">
     <button onclick="login()">LOGIN</button>
     
     <div class="register-link">
